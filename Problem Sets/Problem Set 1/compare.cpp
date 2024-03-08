@@ -1,5 +1,7 @@
 #include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+// cannot use gui on headless google colab, 
+// also gui is not used in this Problem Set
+// #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 
 #include "utils.h"

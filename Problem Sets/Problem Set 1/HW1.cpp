@@ -1,5 +1,7 @@
 #include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+// cannot use gui on headless google colab, 
+// also gui is not used in this Problem Set
+// #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
 #include "utils.h"
 #include <cuda.h>
@@ -27,13 +29,16 @@ void preProcess(uchar4 **inputImage, unsigned char **greyImage,
   checkCudaErrors(cudaFree(0));
 
   cv::Mat image;
-  image = cv::imread(filename.c_str(), CV_LOAD_IMAGE_COLOR);
+//   depracated syntax
+//   image = cv::imread(filename.c_str(), CV_LOAD_IMAGE_COLOR);
+  image = cv::imread(filename.c_str(), cv::IMREAD_COLOR);
   if (image.empty()) {
     std::cerr << "Couldn't open file: " << filename << std::endl;
     exit(1);
   }
-
-  cv::cvtColor(image, imageRGBA, CV_BGR2RGBA);
+// depracated syntax
+//   cv::cvtColor(image, imageRGBA, CV_BGR2RGBA);
+  cv::cvtColor(image, imageRGBA, cv::COLOR_BGR2RGBA);
 
   //allocate memory for the output
   imageGrey.create(image.rows, image.cols, CV_8UC1);
