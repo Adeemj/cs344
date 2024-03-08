@@ -1,30 +1,47 @@
-# Archival Note
-This repository is deprecated; therefore, we are going to archive it.
-However, learners will be able to fork it to their personal Github account but cannot submit PRs to this repository. If you have any issues or suggestions to make, feel free to:
-- Utilize the https://knowledge.udacity.com/ forum to seek help on content-specific issues.
-- Submit a support ticket along with the link to your forked repository if (learners are) blocked for other reasons. Here are the links for the [retail consumers](https://udacity.zendesk.com/hc/en-us/requests/new) and [enterprise learners](https://udacityenterprise.zendesk.com/hc/en-us/requests/new?ticket_form_id=360000279131). 
+# Work on Problem Set 1 on Google Colab GPU
 
-cs344
-=====
+This repository contains the necessary modifications to make the Problem Set compatible with Google Colab. 
 
-Introduction to Parallel Programming class code
+## Opencv Installation on Google Colab
 
-# Building on OS X
+Install OpenCV from source. Here's how you can set up OpenCV:
 
-These instructions are for OS X 10.9 "Mavericks".
+### Step 1: Installing required packages and tools
 
-* Step 1. Build and install OpenCV. The best way to do this is with
-Homebrew. However, you must slightly alter the Homebrew OpenCV
-installation; you must build it with libstdc++ (instead of the default
-libc++) so that it will properly link against the nVidia CUDA dev kit. 
-[This entry in the Udacity discussion forums](http://forums.udacity.com/questions/100132476/cuda-55-opencv-247-os-x-maverick-it-doesnt-work) describes exactly how to build a compatible OpenCV.
-
-* Step 2. You can now create 10.9-compatible makefiles, which will allow you to
-build and run your homework on your own machine:
+```bash
+sudo apt update && sudo apt install -y g++ cmake make git libgtk2.0-dev pkg-config
 ```
-mkdir build
-cd build
-cmake ..
+### Step 2: Download the source
+```bash
+git clone https://github.com/opencv/opencv.git
+```
+### Step 3: Build and Install
+```bash
+mkdir -p build && cd build
+cmake ../opencv -DBUILD_LIST=core,imgproc,imgcodecs 
+make -j$(nproc) 
+sudo make install
+```
+
+## Run Problem Set 1
+
+### Code Completion
+Prior to building the application, ensure that you have implemented all necessary functionality within student_func.cu.
+
+### Compile the Codebase
+Use the provided Makefile to compile the problem set:
+```bash
 make
 ```
+### Run the executable with the required arguments:
+```bash
+./HW1 {input image path}
+```
+Example: 
+```bash
+./HW1 cinque_terre_small.jpg
+```
 
+## Summary of Code Changes
+The Makefile has been updated to remove dependencies on OpenCV's GUI modules since Google Colab runs on a headless server.
+OpenCV syntax in the codebase has been updated to comply with the latest API standards in OpenCV 4.x.
