@@ -23,6 +23,11 @@ make -j$(nproc)
 sudo make install
 ```
 
+### Step 4: Set Library Paths
+```bash
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+```
+
 ## Run Problem Set 1
 
 ### Code Completion
@@ -43,5 +48,6 @@ Example:
 ```
 
 ## Summary of Code Changes
-The Makefile has been updated to remove dependencies on OpenCV's GUI modules since Google Colab runs on a headless server.
-OpenCV syntax in the codebase has been updated to comply with the latest API standards in OpenCV 4.x.
+1. The Makefile has been updated to use correct paths and libraires. 
+2. Removed dependencies on OpenCV's GUI modules since Google Colab runs on a headless server.
+3. OpenCV syntax in the codebase has been updated to comply with the latest API standards in OpenCV 4.x.
